@@ -4527,6 +4527,12 @@
     <string name="build_date">SuperNova build date</string>
     <string name="build_date_default">2012-01-01-0000</string>
 
+    <!-- Settings main menu category heading -->
+    <string name="header_category_interface">SUPERNOVA</string>
+    <!-- System Interface settings  -->
+    <string name="system_settings_title">Nova Tweaks</string>
+    <string name="system_interface_title">Nova Tweaks</string> 
+
     <!-- MY ADDITIONS --> 
 
 </resources>
