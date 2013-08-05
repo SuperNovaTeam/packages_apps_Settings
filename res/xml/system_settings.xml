@@ -49,4 +49,9 @@
             android:fragment="com.android.settings.samuele.StatusBar"
             android:title="@string/status_bar_title" /> 
 
+	<CheckBoxPreference
+            android:key="kill_app_longpress_back"
+            android:title="@string/kill_app_longpress_back"
+            android:summary="@string/kill_app_longpress_back_summary"/> 
+
 </PreferenceScreen> 

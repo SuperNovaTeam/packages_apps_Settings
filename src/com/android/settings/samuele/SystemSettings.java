@@ -35,11 +35,12 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.VolumePanel;
 
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class SystemSettings extends SettingsPreferenceFragment implements
@@ -49,10 +50,16 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake"; 
     private static final String KEY_VOLUME_OVERLAY = "volume_overlay"; 
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls"; 
+    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back"; 
 
     private CheckBoxPreference mVolumeWake; 
     private ListPreference mVolumeOverlay; 
     private CheckBoxPreference mVolBtnMusicCtrl; 
+    private CheckBoxPreference mKillAppLongpressBack; 
+
+    private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
+    private final ArrayList<CheckBoxPreference> mResetCbPrefs
+            = new ArrayList<CheckBoxPreference>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +91,8 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         mVolBtnMusicCtrl.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLBTN_MUSIC_CONTROLS, 1) != 0); 
 
+	mKillAppLongpressBack = findAndInitCheckboxPref(KILL_APP_LONGPRESS_BACK); 
+
     }
 
     @Override
@@ -94,6 +103,8 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 	} else if (preference == mVolBtnMusicCtrl) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLBTN_MUSIC_CONTROLS,
                     mVolBtnMusicCtrl.isChecked() ? 1 : 0); 
+	} else if (preference == mKillAppLongpressBack) {
+	    writeKillAppLongpressBackOptions(); 
 	} else {
 	    // If we didn't handle it, let preferences handle it.
 	    return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -110,9 +121,43 @@ public class SystemSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.MODE_VOLUME_OVERLAY, value);
             mVolumeOverlay.setSummary(mVolumeOverlay.getEntries()[index]);
+	    return true;
         } 
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+	updateKillAppLongpressBackOptions(); 
+    }
+
+    private CheckBoxPreference findAndInitCheckboxPref(String key) {
+        CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
+        if (pref == null) {
+            throw new IllegalArgumentException("Cannot find preference with key = " + key);
+        }
+        mAllPrefs.add(pref);
+        mResetCbPrefs.add(pref);
+        return pref;
+    }
+
+    private void writeKillAppLongpressBackOptions() {
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.KILL_APP_LONGPRESS_BACK,
+                mKillAppLongpressBack.isChecked() ? 1 : 0);
+    }
+
+    private void updateKillAppLongpressBackOptions() {
+        mKillAppLongpressBack.setChecked(Settings.Secure.getInt(
+            getActivity().getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
+    } 
 }
 
