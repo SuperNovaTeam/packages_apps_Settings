@@ -16,21 +16,29 @@
 
 package com.android.settings.samuele;
 
+import android.app.ActivityManagerNative;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver; 
 import android.os.Bundle;
 import android.os.Handler; 
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory; 
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.VolumePanel;
 
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import java.util.List;
 
