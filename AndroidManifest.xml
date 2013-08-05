@@ -1581,7 +1581,10 @@
         </activity>
 
 	<!-- MY ADDITIONS START -->
+
         <activity android:name=".samuele.SystemSettings" />
+	<activity android:name=".cyanogenmod.PowerMenu" /> 
+
         <!-- MY ADDIOTIONS END --> 
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
