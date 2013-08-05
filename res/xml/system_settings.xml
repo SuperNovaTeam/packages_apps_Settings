@@ -5,4 +5,30 @@
     android:title="@string/system_interface_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <PreferenceCategory
+            android:key="category_wakeup_options"
+            android:title="@string/display_category_wakeup_options_title"/>
+
+        <CheckBoxPreference
+            android:key="pref_volume_wake"
+            android:title="@string/pref_volume_wake_title"
+            android:summary="@string/pref_volume_wake_summary"
+            android:defaultValue="false" /> 
+
+    <PreferenceCategory
+            android:key="category_sound_options"
+            android:title="@string/display_category_sound_options_title"/>
+
+        <ListPreference
+                android:key="volume_overlay"
+                android:title="@string/volume_overlay_title"
+                android:entries="@array/volume_overlay_entries"
+                android:entryValues="@array/volume_overlay_values" /> 
+
+        <CheckBoxPreference
+                android:key="volbtn_music_controls"
+                android:title="@string/volbtn_music_controls_title"
+                android:summary="@string/volbtn_music_controls_summary"
+                android:persistent="false" /> 
+
 </PreferenceScreen> 
