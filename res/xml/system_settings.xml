@@ -6,6 +6,15 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
+            android:key="category_LED_options"
+            android:title="@string/display_category_LED_options_title"/>
+
+        <PreferenceScreen
+            android:key="notification_pulse"
+            android:title="@string/notification_pulse_title"
+            android:fragment="com.android.settings.notificationlight.NotificationLightSettings" />
+
+    <PreferenceCategory
             android:key="category_wakeup_options"
             android:title="@string/display_category_wakeup_options_title"/>
 

@@ -50,12 +50,16 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake"; 
     private static final String KEY_VOLUME_OVERLAY = "volume_overlay"; 
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls"; 
-    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back"; 
+    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
+    private static final String KEY_BATTERY_LIGHT = "battery_light";
+    private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
 
     private CheckBoxPreference mVolumeWake; 
     private ListPreference mVolumeOverlay; 
     private CheckBoxPreference mVolBtnMusicCtrl; 
-    private CheckBoxPreference mKillAppLongpressBack; 
+    private CheckBoxPreference mKillAppLongpressBack;
+    private PreferenceScreen mNotificationPulse;
+    private PreferenceScreen mBatteryPulse; 
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
@@ -91,7 +95,16 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         mVolBtnMusicCtrl.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLBTN_MUSIC_CONTROLS, 1) != 0); 
 
-	mKillAppLongpressBack = findAndInitCheckboxPref(KILL_APP_LONGPRESS_BACK); 
+	mKillAppLongpressBack = findAndInitCheckboxPref(KILL_APP_LONGPRESS_BACK);
+
+	mNotificationPulse = (PreferenceScreen) findPreference(KEY_NOTIFICATION_PULSE);
+        if (mNotificationPulse != null) {
+            if (!getResources().getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)) {
+                getPreferenceScreen().removePreference(mNotificationPulse);
+            } else {
+                updateLightPulseDescription();
+              }
+         } 
 
     }
 
@@ -130,6 +143,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+	updateLightPulseDescription(); 
     }
 
     @Override
@@ -138,6 +152,15 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
 	updateKillAppLongpressBackOptions(); 
     }
+
+    private void updateLightPulseDescription() {
+        if (Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.NOTIFICATION_LIGHT_PULSE, 0) == 1) {
+            mNotificationPulse.setSummary(getString(R.string.notification_light_enabled));
+        } else {
+            mNotificationPulse.setSummary(getString(R.string.notification_light_disabled));
+        }
+    } 
 
     private CheckBoxPreference findAndInitCheckboxPref(String key) {
         CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);

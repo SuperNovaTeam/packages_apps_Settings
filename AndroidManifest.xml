@@ -1583,7 +1583,8 @@
 	<!-- MY ADDITIONS START -->
 
         <activity android:name=".samuele.SystemSettings" />
-	<activity android:name=".cyanogenmod.PowerMenu" /> 
+	<activity android:name=".samuele.PowerMenu" />
+	<activity android:name=".notificationlight.NotificationLightSettings" /> 
 
         <!-- MY ADDIOTIONS END --> 
 
