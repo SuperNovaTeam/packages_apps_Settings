@@ -4559,11 +4559,8 @@
     <!-- Status bar  -->
     <string name="display_category_system_bar_options_title">SYSTEM BAR</string>
     <string name="status_bar_title">Status bar</string>
-    <string name="status_bar_clock_title">Clock</string>
+    <string name="status_bar_clock_title">Clock</string> 
     <string name="status_bar_general_title">General</string>
-    <string name="status_bar_show_clock_title">Show clock</string>
-    <string name="status_bar_am_pm_title">AM/PM style</string>
-    <string name="status_bar_am_pm_info">24-hour clock is enabled</string>
     <string name="status_bar_battery_title">Battery status style</string>
     <string name="status_bar_signal_text_title">Signal status style</string>
     <string name="status_bar_style_icon">Icon</string>
@@ -4573,6 +4570,8 @@
     <string name="status_bar_battery_status_circle">Circle</string>
     <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
     <string name="clock_color_title">Clock color</string>
+    <string name="status_bar_am_pm_title">AM/PM style</string>
+    <string name="status_bar_am_pm_info">24-hour clock is enabled</string> 
 
     <!-- Status bar notification count -->
     <string name="status_bar_notif_count_title">Show notification count</string>
