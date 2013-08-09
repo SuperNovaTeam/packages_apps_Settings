@@ -1584,7 +1584,9 @@
 
         <activity android:name=".samuele.SystemSettings" />
 	<activity android:name=".samuele.PowerMenu" />
-	<activity android:name=".notificationlight.NotificationLightSettings" /> 
+	<activity android:name=".notificationlight.NotificationLightSettings" />
+        <activity android:name=".samuele.LockscreenTargets" />
+        <activity android:name=".samuele.LockscreenInterface" /> 
 
         <!-- MY ADDIOTIONS END --> 
 

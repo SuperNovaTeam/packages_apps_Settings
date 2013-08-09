@@ -59,6 +59,7 @@
         android:icon="@drawable/empty_icon" />
 
     <!-- MY ADDITIONS START -->
+
     <header
         android:title="@string/header_category_interface" />
     <!-- System -->
@@ -67,6 +68,7 @@
         android:icon="@drawable/ic_settings_system"
         android:fragment="com.android.settings.samuele.SystemSettings"
         android:title="@string/system_settings_title" />
+
     <!-- MY ADDITION END --> 
 
     <!-- DEVICE -->
