@@ -42,7 +42,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String PREF_ENABLE = "clock_style";
-    private static final String PREF_COLOR_PICKER = "clock_color";  
+    private static final String PREF_COLOR_PICKER = "clock_color";
+    private static final String STATUS_BAR_AUTO_HIDE = "status_bar_auto_hide"; 
 
     private ListPreference mStatusBarBattery;
     private ListPreference mStatusBarCmSignal;
@@ -50,7 +51,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private PreferenceCategory mPrefCategoryGeneral;
     private ListPreference mStatusBarAmPm;
     private ListPreference mStatusBarClock;
-    private ColorPickerPreference mColorPicker; 
+    private ColorPickerPreference mColorPicker;
+    private CheckBoxPreference mStatusBarAutoHide; 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,7 +112,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         int intColor = Settings.System.getInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_CLOCK_COLOR, defaultColor);
         String hexColor = String.format("#%08x", (0xffffffff & intColor));
-        mColorPicker.setSummary(hexColor);  
+        mColorPicker.setSummary(hexColor);
+
+	mStatusBarAutoHide = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_AUTO_HIDE);
+        mStatusBarAutoHide.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.AUTO_HIDE_STATUSBAR, 0) == 1)); 
 
         if (Utils.isWifiOnly(getActivity())) {
             mPrefCategoryGeneral.removePreference(mStatusBarCmSignal);
@@ -168,8 +174,14 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_NOTIF_COUNT, value ? 1 : 0);
             return true;
-        }
-            return false;
-        }
+        } else if (preference == mStatusBarAutoHide) {
+            value = mStatusBarAutoHide.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.AUTO_HIDE_STATUSBAR, value ? 1 : 0);
+            return true;
+	}
+	return super.onPreferenceTreeClick(preferenceScreen, preference); 
+        
+    }
 }
 
