@@ -37,13 +37,15 @@ public class PowerMenu extends SettingsPreferenceFragment implements OnPreferenc
     private static final String KEY_EXPANDED_DESKTOP = "power_menu_expanded_desktop";
     private static final String KEY_AIRPLANE = "power_menu_airplane";
     private static final String KEY_SILENT = "power_menu_silent";
-    private static final String KEY_USER = "power_menu_user"; 
+    private static final String KEY_USER = "power_menu_user";
+    private static final String KEY_ROTATION = "power_menu_rotation";
 
     private CheckBoxPreference mRebootPref;
     private CheckBoxPreference mScreenshotPref;
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mAirplanePref;
     private CheckBoxPreference mSilentPref;
+    private CheckBoxPreference mRotationPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,10 @@ public class PowerMenu extends SettingsPreferenceFragment implements OnPreferenc
         mAirplanePref = (CheckBoxPreference) findPreference(KEY_AIRPLANE);
         mAirplanePref.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.POWER_MENU_AIRPLANE_ENABLED, 1) == 1));
+
+	mRotationPref = (CheckBoxPreference) findPreference(KEY_ROTATION);
+        mRotationPref.setChecked((Settings.System.getInt(getContentResolver(),
+                Settings.System.POWER_MENU_ROTATION_LOCK_ENABLED, 1) == 1));
 
         mSilentPref = (CheckBoxPreference) findPreference(KEY_SILENT);
         mSilentPref.setChecked((Settings.System.getInt(getContentResolver(),
@@ -110,6 +116,11 @@ public class PowerMenu extends SettingsPreferenceFragment implements OnPreferenc
             value = mSilentPref.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_SILENT_ENABLED,
+                    value ? 1 : 0);
+	} else if (preference == mRotationPref) {
+            value = mRotationPref.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_ROTATION_LOCK_ENABLED,
                     value ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);

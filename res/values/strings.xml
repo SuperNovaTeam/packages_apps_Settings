@@ -4553,6 +4553,7 @@
     <string name="power_menu_expanded_desktop">Expanded desktop</string>
     <string name="power_menu_airplane_title">Airplane mode</string>
     <string name="power_menu_silent_title">Sound panel</string>
+    <string name="power_menu_rotation_lock_title">Rotation Lock</string>
 
     <!-- Status bar  -->
     <string name="display_category_system_bar_options_title">SYSTEM BAR</string>
