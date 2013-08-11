@@ -1586,7 +1586,8 @@
 	<activity android:name=".samuele.PowerMenu" />
 	<activity android:name=".notificationlight.NotificationLightSettings" />
         <activity android:name=".samuele.LockscreenTargets" />
-        <activity android:name=".samuele.LockscreenInterface" /> 
+        <activity android:name=".samuele.LockscreenInterface" />
+	<activity android:name=".samuele.StatusBarStyle" /> 
 
         <!-- MY ADDIOTIONS END --> 
 
