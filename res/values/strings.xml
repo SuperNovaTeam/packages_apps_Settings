@@ -4715,6 +4715,10 @@
     <string name="status_bar_alpha_mode_always">always</string>
     <string name="status_bar_style_reset">Reset</string>
 
+    <string name="device_hard_info_title">Hardware info</string>
+    <string name="camera_info">Rear camera</string>
+    <string name="fcamera_info">Front camera</string>
+
     <!-- MY ADDITIONS --> 
 
 </resources>
